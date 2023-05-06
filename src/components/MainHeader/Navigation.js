@@ -1,24 +1,29 @@
-import React from 'react';
+import React, { useContext } from "react";
 
-import classes from './Navigation.module.css';
+import classes from "./Navigation.module.css";
+import AuthContext from "../Store/auto-context";
 
-const Navigation = (props) => {
+// Instead of using Authcontext.Consumer we user useContext() hook , caz with Consumer we have to return function .
+// using context this look more cleaner and looks more readable .
+
+const Navigation = () => {
+  const ctx = useContext(AuthContext);
   return (
     <nav className={classes.nav}>
       <ul>
-        {props.isLoggedIn && (
+        {ctx.isLoggedIn && (
           <li>
             <a href="/">Users</a>
           </li>
         )}
-        {props.isLoggedIn && (
+        {ctx.isLoggedIn && (
           <li>
             <a href="/">Admin</a>
           </li>
         )}
-        {props.isLoggedIn && (
+        {ctx.isLoggedIn && (
           <li>
-            <button onClick={props.onLogout}>Logout</button>
+            <button onClick={ctx.onLogout}>Logout</button>
           </li>
         )}
       </ul>
